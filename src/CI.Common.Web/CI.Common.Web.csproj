@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CI.Common.Exceptions\CI.Common.Exceptions.csproj" />
+    <ProjectReference Include="..\CI.Common.Logger\CI.Common.Logger.csproj" />
     <ProjectReference Include="..\CI.Common\CI.Common.csproj" />
   </ItemGroup>
 
