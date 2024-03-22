@@ -2,13 +2,13 @@
 
 namespace CI.Common.Logger
 {
-    public static class Log<T>
+    public class Log<T> where T : new()
     {
         private static ILogger log;
 
         static Log()
-        {
-            log = LogManager.GetLogger(typeof(T).Name, typeof(T));
+        {            
+            log = new LogFactory().GetLogger(typeof(T).Name);
         }
 
         public static void Debug(object message)

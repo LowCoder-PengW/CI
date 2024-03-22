@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"      
+      autoReload="true"
+      throwExceptions="false"
+      internalLogLevel="Off" internalLogFile="d:\temp\nlog-internal.log">  
+
+  <targets>
+    <!--Error保存至文件-->
+    <target name="error_file" xsi:type="File" maxArchiveFiles="30"  encoding="utf-8"
+            fileName="${basedir}/NLogs/${date:yyyyMMdd}_Error.TXT"
+            archiveFileName="${basedir}/NLogs/${date:yyyyMMdd}_Error.{#}.TXT"
+            archiveDateFormat="yyyyMMdd"
+            archiveAboveSize="104857600"
+            archiveNumbering="Sequence"
+            layout="${date:yyyy-MM-dd HH\:mm\:ss} ${message} ${onexception:${exception:format=tostring} ${newline} ${stacktrace}" />
+    <!--Trace保存至文件-->
+    <target name="trace_file" xsi:type="File" maxArchiveFiles="30" encoding="utf-8"
+            fileName="${basedir}/NLogs/${date:yyyyMMdd}_Trace.TXT"
+            archiveFileName="${basedir}/NLogs/${date:yyyyMMdd}_Trace.{#}.TXT"
+            archiveDateFormat="yyyyMMdd"
+            archiveAboveSize="104857600"
+            archiveNumbering="Sequence"
+            layout="${date:yyyy-MM-dd HH\:mm\:ss} ${uppercase:${level}}： ${message}" />
+    <!--Info保存至文件-->
+    <target name="info_file" xsi:type="File" maxArchiveFiles="30" encoding="utf-8"
+            fileName="${basedir}/NLogs/${date:yyyyMMdd}_Info.TXT"
+            archiveFileName="${basedir}/NLogs/${date:yyyyMMdd}_Info.{#}.TXT"
+            archiveDateFormat="yyyyMMdd"
+            archiveAboveSize="104857600"
+            archiveNumbering="Sequence"
+            layout="${date:yyyy-MM-dd HH\:mm\:ss} ${uppercase:${level}}： ${message}" />
+  </targets>
+
+  <rules>
+    <!-- add your logging rules here -->
+    <logger name="*" minlevel="Trace" maxlevel="Warn" writeTo="trace_file" />
+    <!--<logger name="*" minlevel="Debug" writeTo="debugger" />-->
+    <logger name="*" minlevel="Error" writeTo="error_file" />    
+    <logger name="*" minlevel="Info" writeTo="info_file" />
+  </rules>
+</nlog>

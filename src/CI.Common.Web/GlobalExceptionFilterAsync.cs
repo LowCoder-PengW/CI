@@ -48,7 +48,7 @@ namespace CI.Common.Web
                 Log<GlobalExceptionFilterAsync>.Error("GlobalInnerExceptionFilter:" + context.Exception.InnerException.Message, context.Exception.InnerException);
             }
 
-            await Task.CompletedTask;
+           await Task.CompletedTask;
         }
     }
 }
