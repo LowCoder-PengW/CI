@@ -10,9 +10,9 @@ namespace CI.Common.Json
             return typeToConvert.IsEnum;
         }
 
-        public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
-           throw new Exception();
+            return new EnumPropertyConverter(typeToConvert);
         }
     }
 }
