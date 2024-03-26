@@ -26,20 +26,16 @@ namespace CI.Common.Web
                         Field = e.Key,
                         ErrorMessage = e.Value.Errors?.FirstOrDefault()?.ErrorMessage
                     }).ToList();
+
                     list.RemoveAll(s => s == null || string.IsNullOrEmpty(s.ErrorMessage));
                     //格式定义
                     FuncResult value = new FuncResult
                     {
                         Code = "0400",
-                        Message = string.Join(";", list.Select(e => e.ErrorMessage.Replace("$FIELD$", e.Field)).Distinct())
+                        Message = string.Join(";", list.Select(e => e.Field + e.ErrorMessage).Distinct())
                     };
 
-                    actionContext.HttpContext.Features.Set(new HttpStatusCodeWrapperFeature(HttpStatusCode.BadRequest));
-
-                    return new ObjectResult(value)
-                    {
-                        StatusCode = 200
-                    };
+                    return new StatusCodeObjectResult(HttpStatusCode.OK, value);
                 };
             });
         }

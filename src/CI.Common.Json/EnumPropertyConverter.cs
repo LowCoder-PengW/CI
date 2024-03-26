@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -19,7 +20,8 @@ namespace CI.Common.Json
 
         public override Enum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            string enumString = reader.GetString();
+            return (Enum)Enum.Parse(typeToConvert, enumString);
         }
 
         public override void Write(Utf8JsonWriter writer, Enum value, JsonSerializerOptions options)

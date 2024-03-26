@@ -25,7 +25,7 @@ namespace CI.Common.Web
 
             ///处理异常
             context.ExceptionHandled = true;
-
+            
             //暂时只考虑 exception 情况 
             context.Result = new StatusCodeObjectResult(HttpStatusCode.OK, funcResult);
              
