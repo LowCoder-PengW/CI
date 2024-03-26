@@ -29,8 +29,7 @@ namespace CI.Common.Json
         public override bool CanConvert(Type objectType)
         {
             return (typeof(DateTime?) == objectType);
-        }
-
+        } 
 
         public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
